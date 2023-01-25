@@ -1,47 +1,3 @@
-CREATE TABLE "users" (
-  "id" uuid PRIMARY KEY,
-  "name" varchar NOT NULL,
-  "email" varchar UNIQUE NOT NULL,
-  "password" varchar NOT NULL,
-  "age" int
-);
-
-CREATE TABLE "categories" (
-  "id" serial PRIMARY KEY,
-  "name" varchar NOT NULL
-);
-
-CREATE TABLE "courses" (
-  "id" serial PRIMARY KEY,
-  "category_id" serial,
-  "title" varchar UNIQUE NOT NULL,
-  "description" varchar,
-  "level" varchar NOT NULL,
-  "teacher" varchar NOT NULL
-);
-
-CREATE TABLE "users_courser" (
-  "id" serial PRIMARY KEY,
-  "course_id" serial,
-  "user_id" uuid
-);
-
-CREATE TABLE "course_video" (
-  "id" serial PRIMARY KEY,
-  "course_id" serial,
-  "title" varchar NOT NULL,
-  "url" varchar NOT NULL
-);
-
-ALTER TABLE "users_courser" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
-
-ALTER TABLE "users_courser" ADD FOREIGN KEY ("course_id") REFERENCES "courses" ("id");
-
-ALTER TABLE "course_video" ADD FOREIGN KEY ("course_id") REFERENCES "courses" ("id");
-
-ALTER TABLE "courses" ADD FOREIGN KEY ("category_id") REFERENCES "categories" ("id");
-
-
 insert into users ("id","name","email","password","age")
 values
 ('b32219c0-4b10-4205-8e5b-b886349f1c1c','diego','a@hotmail.com','root',18),
@@ -66,7 +22,7 @@ values
 (4,'teoría electromagnética','4to semestre','Ing. Martones'),
 (5,'lenguaje oral y escrita','5to semestre','Ing. Mora')
 
-insert into users_courser ("course_id","user_id")
+insert into user_courser ("course_id","user_id")
 values
 (1,'b32219c0-4b10-4205-8e5b-b886349f1c1c'),
 (2,'b069c89b-1e4c-4e23-b208-edcd678c405a'),
